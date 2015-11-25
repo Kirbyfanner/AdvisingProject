@@ -1,16 +1,30 @@
 <?php
-/* Updated by Douglas Lueben */
+/* PROJ2: Updated by Douglas Lueben */
 
-//Start the session on this page
-session_start();
+session_start(); //Here for the student ID
+
+/* Pull the "session variables"
+This is a simple fix, and could definitely be done with less
+repetition if an entire re-write of the website was possible.
+But, to save time, we'll pull all of the information at the top
+of the page to save time */
+$debug = false;
 
 //Connect to the database
-$debug = false;
 include('CommonMethods.php');
 $COMMON = new Common($debug);
 
-//Store a local copy of student ID
 $studID = $_SESSION["studID"];
+
+$sql = "select * from Proj2Students where `StudentID` = '$studID'";
+$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+$row = mysql_fetch_row($rs);
+
+$firstN = $row[1];
+$lastN = $row[2];
+$email = $row[4];
+$major = $row[5];
+$status = $row[6];
 ?>
 
 <html lang="en">
@@ -57,7 +71,6 @@ $studID = $_SESSION["studID"];
 				$sql = "update `Proj2Students` set `Status` = 'N' where `StudentID` = '$studID'";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 			}
-	
 
 		?>
         </div>

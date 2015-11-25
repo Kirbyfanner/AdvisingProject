@@ -4,12 +4,6 @@
 //Start the session on this page
 session_start();
 
-//Update the student information for this session
-$_SESSION["firstN"] = strtoupper($_POST["firstN"]);
-$_SESSION["lastN"] = strtoupper($_POST["lastN"]);
-$_SESSION["email"] = $_POST["email"];
-$_SESSION["major"] = $_POST["major"];
-
 //Make local copies of the variables
 $firstn = strtoupper($_POST["firstN"]);
 $lastn = strtoupper($_POST["lastN"]);

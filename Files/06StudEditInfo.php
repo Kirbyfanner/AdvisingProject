@@ -1,30 +1,30 @@
 <?php
-/* Updated by Douglas Lueben */
+/* PROJ2: Updated by Douglas Lueben */
 
-//Start the session on the current page
-session_start();
+session_start(); //Here for the student ID
+
+/* Pull the "session variables"
+This is a simple fix, and could definitely be done with less
+repetition if an entire re-write of the website was possible.
+But, to save time, we'll pull all of the information at the top
+of the page to save time */
+$debug = false;
 
 //Connect to the database
-$debug = false;
 include('CommonMethods.php');
 $COMMON = new Common($debug);
 
-/* Get the student's information */
+$studID = $studID;
 
-//Prepare the SQL query
-$sql = "SELECT * FROM `Proj2Students` WHERE (`StudentID` = '";
-$sql .= $_SESSION["studID"];
-$sql .= "')";
-
-//Fetch the row
+$sql = "select * from Proj2Students where `StudentID` = '$studID'";
 $rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+$row = mysql_fetch_row($rs);
 
-//Parse the row for information
-$row = (mysql_fetch_row($rs));
-$_SESSION["firstN"] = $row[1];
-$_SESSION["lastN"] = $row[2];
-$_SESSION["email"] = $row[4];
-$_SESSION["major"] = $row[5];
+$firstN = $row[1];
+$lastN = $row[2];
+$email = $row[4];
+$major = $row[5];
+$status = $row[6];
 
 ?>
 <html lang="en">
@@ -45,35 +45,35 @@ $_SESSION["major"] = $row[5];
 			<!-- First Name -->
 			<div class="field">
 				<label for="firstN">First Name</label>
-				<input id="firstN" size="30" maxlength="50" type="text" name="firstN" required value=<?php echo $_SESSION["firstN"]?>>
+				<input id="firstN" size="30" maxlength="50" type="text" name="firstN" required value=<?php echo $firstN?>>
 			</div>
 			
 			<!-- Last Name -->
 			<div class="field">
 			  <label for="lastN">Last Name</label>
-			  <input id="lastN" size="30" maxlength="50" type="text" name="lastN" required value=<?php echo $_SESSION["lastN"]?>>
+			  <input id="lastN" size="30" maxlength="50" type="text" name="lastN" required value=<?php echo $lastN?>>
 			</div>
 			
 			<!-- Student ID -->
 			<div class="field">
 				<label for="studID">Student ID</label>
-				<input id="studID" size="30" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" name="studID" disabled value=<?php echo $_SESSION["studID"]?>>
+				<input id="studID" size="30" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" name="studID" disabled value=<?php echo $studID?>>
 			</div>
 			
 			<!-- Email -->
 			<div class="field">
 				<label for="email">E-mail</label>
-				<input id="email" size="30" maxlength="255" type="email" name="email" required value=<?php echo $_SESSION["email"]?>>
+				<input id="email" size="30" maxlength="255" type="email" name="email" required value=<?php echo $email?>>
 			</div>
 			
 			<!-- Major -->
 			<div class="field">
 				  <label for="major">Major</label>
 				  <select id="major" name = "major">
-					<option <?php if($_SESSION["major"] == 'CMPE'){echo("selected");}?> value="CMPE">Computer Engineering</option>
-					<option <?php if($_SESSION["major"] == 'CMSC'){echo("selected");}?> value="CMSC">Computer Science</option>
-					<option <?php if($_SESSION["major"] == 'MENG'){echo("selected");}?>value="MENG">Mechanical Engineering</option>
-					<option <?php if($_SESSION["major"] == 'CENG'){echo("selected");}?>value="CENG">Chemical Engineering</option>
+					<option <?php if($major == 'CMPE'){echo("selected");}?> value="CMPE">Computer Engineering</option>
+					<option <?php if($major == 'CMSC'){echo("selected");}?> value="CMSC">Computer Science</option>
+					<option <?php if($major == 'MENG'){echo("selected");}?>value="MENG">Mechanical Engineering</option>
+					<option <?php if($major == 'CENG'){echo("selected");}?>value="CENG">Chemical Engineering</option>
 					</select>
 			</div>
 			<div class="nextButton">

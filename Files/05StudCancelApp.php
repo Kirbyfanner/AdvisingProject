@@ -1,13 +1,30 @@
 <?php
-/* Updated by Douglas Lueben */
+/* PROJ2: Updated by Douglas Lueben */
 
-//Start the session on this page
-session_start();
+session_start(); //Here for the student ID
+
+/* Pull the "session variables"
+This is a simple fix, and could definitely be done with less
+repetition if an entire re-write of the website was possible.
+But, to save time, we'll pull all of the information at the top
+of the page to save time */
+$debug = false;
 
 //Connect to the database
-$debug = false;
 include('CommonMethods.php');
 $COMMON = new Common($debug);
+
+$studID = $_SESSION["studID"];
+
+$sql = "select * from Proj2Students where `StudentID` = '$studID'";
+$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+$row = mysql_fetch_row($rs);
+
+$firstN = $row[1];
+$lastN = $row[2];
+$email = $row[4];
+$major = $row[5];
+$status = $row[6];
 ?>
 
 <html lang="en">
@@ -22,17 +39,9 @@ $COMMON = new Common($debug);
         <div class="top">
 		<h1>Cancel Appointment</h1>
 	    <div class="field">
-	    <?php
-		
-			//Store local copies of session variables
-			$firstn = $_SESSION["firstN"];
-			$lastn = $_SESSION["lastN"];
-			$studid = $_SESSION["studID"];
-			$major = $_SESSION["major"];
-			$email = $_SESSION["email"];
-			
+	    <?php			
 			//Select the student's appointment
-			$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studid%'";
+			$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studID%'";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 			$row = mysql_fetch_row($rs);
 			$oldAdvisorID = $row[2];

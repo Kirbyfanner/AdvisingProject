@@ -1,8 +1,31 @@
 <?php
-/* Updated by Douglas Lueben */
+/* PROJ2: Updated by Douglas Lueben */
 
-//Start the session on the page
-session_start();
+session_start(); //Here for the student ID
+
+/* Pull the "session variables"
+This is a simple fix, and could definitely be done with less
+repetition if an entire re-write of the website was possible.
+But, to save time, we'll pull all of the information at the top
+of the page to save time */
+$debug = false;
+
+//Connect to the database
+include('CommonMethods.php');
+$COMMON = new Common($debug);
+
+$studID = $_SESSION["studID"];
+
+$sql = "select * from Proj2Students where `StudentID` = '$studID'";
+$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+$row = mysql_fetch_row($rs);
+
+$firstN = $row[1];
+$lastN = $row[2];
+$email = $row[4];
+$major = $row[5];
+$status = $row[6];
+
 ?>
 
 <html lang="en">
@@ -18,33 +41,24 @@ session_start();
 		<h2>Hello 
 		<?php
 			//Greet user
-			echo $_SESSION["firstN"];
+			echo $firstN;
 		?>
         </h2>
 	    <div class="selections">
 		<form action="StudProcessHome.php" method="post" name="Home">
-	    <?php
-			$debug = false;
-
-			//Connect to the database
-			include('CommonMethods.php');
-			$COMMON = new Common($debug);
-			
+	    <?php			
 			/* Setup variables to pull from the database */
-			$_SESSION["studExist"] = false;
 			$adminCancel = false;
 			$noApp = false;
-			$studid = $_SESSION["studID"];
 
 			/* Pull this student's information from the DB */
-			$sql = "select * from Proj2Students where `StudentID` = '$studid'";
+			$sql = "select * from Proj2Students where `StudentID` = '$studID'";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 			$row = mysql_fetch_row($rs);
 			
 			/* If the row is empty, then the student has never made an appointment before,
 			and therefore doesn't exist in Proj2Students. Otherwise, pull the student's information */
 			if (!empty($row)){
-				$_SESSION["studExist"] = true;
 				
 				/* If 'C', then the advisor cancelled */
 				if($row[6] == 'C'){
@@ -58,7 +72,7 @@ session_start();
 			}
 
 			/* If there isn't a proper appointment, allow the user to signup for an appointment */
-			if ($_SESSION["studExist"] == false || $adminCancel == true || $noApp == true){
+			if ($adminCancel == true || $noApp == true){
 				if($adminCancel == true){
 					echo "<p style='color:red'>The advisor has cancelled your appointment! Please schedule a new appointment.</p>";
 				}
