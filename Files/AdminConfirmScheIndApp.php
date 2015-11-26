@@ -1,5 +1,5 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S. */
 
 //Start the session for this page
 session_start();
@@ -89,9 +89,7 @@ $COMMON = new Common($debug);
 			}
 			
 			//get advisor id
-			$User = $_SESSION["UserN"];
-			$Pass = $_SESSION["PassW"];
-			$sql = "select `id` from `Proj2Advisors` where `Username` = '$User' and `Password` = '$Pass'";
+			$sql = "select * from `Proj2Advisors` where `id` = '{$_SESSION["UserId"]}'";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 			$row = mysql_fetch_row($rs);
 			$id = $row[0];

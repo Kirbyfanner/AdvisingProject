@@ -1,8 +1,6 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S. */
 
-//Start the session for this page
-session_start();
 
 //Schedule Appt.
 if($_POST["next"] == 'Schedule appointments'){

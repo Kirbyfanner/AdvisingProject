@@ -1,11 +1,7 @@
-<?php
-/* Updated by Douglas Lueben */
-
-//Starts the session on this page
-session_start();
-?>
+<!-- Updated by Dan S. -->
 
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />

@@ -1,8 +1,6 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S.*/
 
-//Start the session on this page
-session_start();
 
 //Connect to the database
 $debug = false;

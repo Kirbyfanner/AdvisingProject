@@ -1,8 +1,8 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S. */
 
 //Start the session on the page
-session_start();
+session_start();//used for data validation
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +21,9 @@ session_start();
 		//If the passwords didn't match, display that to the user
       if($_SESSION["PassCon"] == true){
         echo "<h3 style='color:red'>Passwords do not match!!</h3>";
+      }
+	  if($_SESSION["Val"] == true){
+        echo "<h3 style='color:red'>Advisor already exists</h3>";
       }
     ?>
 	

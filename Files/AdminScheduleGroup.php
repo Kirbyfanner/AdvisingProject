@@ -1,10 +1,5 @@
-<?php
-/* Updated by Douglas Lueben */
 
-//Start the session for this page
-session_start();
-?>
-
+<!--Updated by Dan S.-->
 <!DOCTYPE html>
 <html lang="en">
   <head>

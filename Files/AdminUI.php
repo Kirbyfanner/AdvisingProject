@@ -3,9 +3,18 @@
 session_start();
 $debug = false;
 
+//for form data validation
+$_SESSION["PassCon"] = false;
+$_SESSION["Val"] = false;
+
+//Set up a connection to the database
+include('CommonMethods.php');
+$Common = new Common($debug);
+
 //Dump all session variables if we're in debug mode
 if($debug) { echo("Session variables-> ".var_dump($_SESSION)); }
 ?>
+<!-- Updated by Dan S. -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,13 +30,17 @@ if($debug) { echo("Session variables-> ".var_dump($_SESSION)); }
 	<h2> Hello 
 	<?php
 
-	if(!isset($_SESSION["UserN"])) // someone landed this page by accident
+	if(!isset($_SESSION["UserId"])) // someone landed this page by accident
 	{
 		return;
 	}		
 	
+	$sql = "SELECT * FROM `Proj2Advisors` WHERE `id` = '{$_SESSION['UserId']}'";
+	$rs = $Common->executeQuery($sql, "Advising Appointments");
+	$row = mysql_fetch_row($rs);
+	
 		//Print the advisor's name as a greeting
-		echo $_SESSION["FirstN"];
+		echo $row[1];
 	?>
 	</h2>
 	

@@ -1,11 +1,14 @@
 <?php
-//Allows this page to read and edit session variables
-session_start();
+$debug = false;
+
+//Set up a connection to the database
+include('CommonMethods.php');
+$Common = new Common($debug);
 ?>
 
-<!-- Updated by Douglas Lueben -->
+<!-- Updated by Dan S. -->
 
-<!DOCTYPE html>
+<!DOCTYPE html>+
 <html lang="en">
 
   <head>
@@ -21,14 +24,6 @@ session_start();
 		<h1>UMBC COEIT Engineering and Computer Science Advising</h1>
 		<h2>Admin Sign In</h2>
 
-    <?php
-	
-	/* If the user was sent back here because their password or username
-	was incorrect, inform them of that */
-      if($_SESSION["UserVal"] == true){
-        echo "<h3 style='color:red'>Invalid Username/Password combination</h3>";
-      }
-    ?>
 		<!-- Sign in form -->
         <form action="AdminProcessSignIn.php" method="POST" name="SignIn">
 
