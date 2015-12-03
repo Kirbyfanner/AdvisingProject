@@ -30,10 +30,10 @@ $debug = false;
 
 
 	//Setup the query to fetch all
-      $sql = "SELECT `id`, `firstName`, `lastName` FROM `Proj2Advisors` WHERE `id` = '$User'";
+      $sql = "SELECT `firstName`, `lastName` FROM `Proj2Advisors` WHERE `id` = '$User'";
       $rs = $COMMON->executeQuery($sql, "Advising Appointments");
       $row = mysql_fetch_row($rs);
-      $id = $row[0];
+      $id = $User;
       $FirstName = $row[1];
       $LastName = $row[2];
 		
