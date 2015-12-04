@@ -20,27 +20,27 @@ session_start();
 			$_SESSION["resch"] = false;			
 			
 			//The appt. went through
-			if($_SESSION["status"] == "complete"){
+			if($_POST["status"] == "complete"){
 				echo "You have completed your sign-up for an advising appointment.";
 			}
 			
 			//The student decided not to
-			elseif($_SESSION["status"] == "none"){
+			elseif($_POST["status"] == "none"){
 				echo "You did not sign up for an advising appointment.";
 			}
 			
 			//The appointment was cancelled
-			if($_SESSION["status"] == "cancel"){
+			if($_POST["status"] == "cancel"){
 				echo "You have cancelled your advising appointment.";
 			}
 			
 			//The appt. was changed
-			if($_SESSION["status"] == "resch"){
+			if($_POST["status"] == "resch"){
 				echo "You have changed your advising appointment.";
 			}
 			
 			//The appt. was left alone
-			if($_SESSION["status"] == "keep"){
+			if($_POST["status"] == "keep"){
 				echo "No changes have been made to your advising appointment.";
 			}
 		?>

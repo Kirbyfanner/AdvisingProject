@@ -5,11 +5,6 @@
 session_start();
 $debug = false;
 
-//Get the advisor's ID
-if(isset($_POST["advisor"])){
-	$_SESSION["advisor"] = $_POST["advisor"];
-}
-
 //Connect to the  database
 include('CommonMethods.php');
 $COMMON = new Common($debug);
@@ -19,6 +14,23 @@ $sql = "select * from Proj2Advisors where `id` = '$localAdvisor'";
 $rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 $row = mysql_fetch_row($rs);
 $advisorName = $row[1]." ".$row[2];
+
+//Get session vars
+$appTime = $_POST["appTime"];
+$advisor = $_POST["advisor"];
+
+//Get sessions vars
+$studID = $_SESSION["studID"];
+
+$sql = "select * from Proj2Students where `StudentID` = '$studID'";
+$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+$row = mysql_fetch_row($rs);
+
+$firstN = $row[1];
+$lastN = $row[2];
+$email = $row[4];
+$major = $row[5];
+$status = $row[6];
 ?>
 
 <html lang="en">
@@ -43,13 +55,13 @@ $advisorName = $row[1]." ".$row[2];
 			$curtime = time();
 
 			//Create local copies of session vars
-			$localAdvisor = $_SESSION["advisor"];
-			$localMaj = $_SESSION["major"];
+			$localAdvisor = $advisor;
+			$localMaj = $major;
 			
-			if ($_SESSION["advisor"] != "Group")  // for individual conferences only
+			if ($advisor != "Group")  // for individual conferences only
 			{ 
 				$sql = "select * from Proj2Appointments where $temp `EnrolledNum` = 0 
-					and (`Major` like '%$localMaj%' or `Major` = '') and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` = ".$_POST['advisor']." 
+					and (`Major` like '%$localMaj%' or `Major` = '') and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` = ".$advisor." 
 					order by `Time` ASC limit 30";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Individual Advising</h2><br>";
@@ -78,6 +90,8 @@ $advisorName = $row[1]." ".$row[2];
 		<!-- Confirm Selection -->
 	    <div class="nextButton">
 			<input type="submit" name="next" class="button large go" value="Next">
+			<input type="hidden" name="advisor" value="<?php echo $advisor; ?>" />
+			<input type="hidden" name="appTime" value="<?php echo $appTime; ?>" />
 	    </div>
 		</form>
 		<div>

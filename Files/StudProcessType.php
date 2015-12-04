@@ -1,18 +1,30 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Douglas Lueben - Project 2 */
 
 //Start the session on this page
 session_start();
 
+/* For who knows what reason, we're removing session variables
+and have to use inferior methods of data passing, so instead of
+passing these variables as session variables, i'll go ahead and
+pass them as post variables using javascript + invisible form. */
+
+//Replaces $_SESSION["advisor"]
+$advisor = "";
+//Replaces $_SESSION["appTime"]
+$appTime = "";
+//Replaces the header redirects
+$redirect = "";
+
 //Group
 if ($_POST["type"] == "Group"){
-	$_SESSION["advisor"] = $_POST["type"];
-	header('Location: 08StudSelectTime.php');
+	$advisor = $_POST["type"];
+	$redirect = "08StudSelectTime.php";
 }
 
 //Individual
 elseif ($_POST["type"] == "Individual"){
-	header('Location: 07StudSelectAdvisor.php');
+	$redirect = "07StudSelectAdvisor.php";
 }
 
 //Next Available (section created by Douglas Lueben)
@@ -33,19 +45,32 @@ elseif ($_POST["type"] == "Next Available")
 	if(isset($row))
 	{
 		//Get the advisor's id
-		$_SESSION["advisor"] = $row[2];
+		$advisor = $row[2];
 		
 		//Get the appointment time
-		$_SESSION["appTime"] = $row[1];
+		$appTime = $row[1];
 		
 		//Redirect!
-		header('Location: 10StudConfirmSch.php');
+		$redirect = "10StudConfirmSch.php";
 	}
 	//If we didn't, there must be NO more appointments! Redirect to 12
 	else
 	{
-		header('Location: 13StudDenied.php');
+		$redirect = "13StudDenied.php";
 	}
 }
 
 ?>
+
+<!-- The invisible form, to POST the "session variables" -->
+<form action="<?php echo $redirect; ?>" method="post" id="fakeSession">
+
+<input type="hidden" name="advisor" value="<?php echo $advisor; ?>" />
+<input type="hidden" name="appTime" value="<?php echo $appTime; ?>" />
+
+</form>
+
+<!-- The JS that auto triggers this form -->
+<script type="text/javascript">
+	document.getElementById('fakeSession').submit();
+</script>

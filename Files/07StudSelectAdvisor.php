@@ -8,6 +8,10 @@ session_start();
 $debug = false;
 include('CommonMethods.php');
 $COMMON = new Common($debug);
+
+//Get the fake session vars from the previous page
+$appTime = $_POST["appTime"];
+$advisor = $_POST["advisor"];
 ?>
 
 <html lang="en">
@@ -40,6 +44,10 @@ $COMMON = new Common($debug);
 			<input type="submit" name="next" class="button large go" value="Next">
 	    </div>
 		</div>
+		
+		<input type="hidden" name="advisor" value="<?php echo $advisor; ?>" />
+		<input type="hidden" name="appTime" value="<?php echo $appTime; ?>" />
+		
 		</form>
 		<div>
 		
