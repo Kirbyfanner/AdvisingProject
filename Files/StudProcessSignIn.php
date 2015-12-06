@@ -30,8 +30,8 @@ if(empty($row))
 	$major = $_POST["major"];
 	
 	$insertSql = "insert into `Proj2Students` (`FirstName`, `LastName`,
-	`StudentId`, `Email`, `Major`) VALUES ('$firstName', 
-	'$lastName', '$id', '$email', '$major')";
+	`StudentId`, `Email`, `Major`, `Status`) VALUES ('$firstName', 
+	'$lastName', '$id', '$email', '$major', 'N')";
 	$COMMON->executeQuery($insertSql, $_SERVER["SCRIPT_NAME"]);
 }
 

@@ -35,7 +35,7 @@ elseif ($_POST["type"] == "Next Available")
 	$COMMON = new Common($debug);
 	
 	//Create the query
-	$sql = "SELECT * FROM `Proj2Appointments` WHERE (`Time` > NOW()) ORDER BY `Time` LIMIT 1";
+	$sql = "SELECT * FROM `Proj2Appointments` WHERE (`Time` > NOW()) AND `EnrolledNum` < `Max` ORDER BY `Time` LIMIT 1";
 	
 	//Get the appointment
 	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);

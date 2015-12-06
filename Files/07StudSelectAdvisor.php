@@ -45,7 +45,6 @@ $advisor = $_POST["advisor"];
 	    </div>
 		</div>
 		
-		<input type="hidden" name="advisor" value="<?php echo $advisor; ?>" />
 		<input type="hidden" name="appTime" value="<?php echo $appTime; ?>" />
 		
 		</form>

@@ -1,5 +1,5 @@
 <?php
-/* Completely Re-written by Douglas Lueben for Project 2 */
+/* Re-written by Douglas Lueben for Project 2 */
 
 //Pull the session variable we're allowed to have.
 session_start();
@@ -32,6 +32,14 @@ $lastN = $row[2];
 $email = $row[4];
 $major = $row[5];
 $status = $row[6];
+
+//Check that the appointment still exists
+if(!isStillAvailable($appTime, $advisor))
+{
+	$redirect = "13StudDenied.php";
+}
+else
+{
 
 //regular new schedule
 if($_POST["finish"] == 'Submit'){
@@ -88,6 +96,35 @@ elseif($_POST["finish"] == 'Reschedule'){
 //update stud status to ''
 $sql = "update `Proj2Students` set `Status` = '' where `StudentID` = '$studID'";
 $rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+}
+
+function isStillAvailable($apptime, $advisor)
+{
+	// advisor could be "Group"
+	global $debug; global $COMMON;
+	$sql = "";
+
+	if($advisor == "Group")
+	{ $sql = "select `EnrolledNum`, `Max` from `Proj2Appointments` where `Time` = '$apptime' and `AdvisorID` = 0";  }
+	else // then specific
+	{ $sql = "select `EnrolledNum`, `Max` from `Proj2Appointments` where `Time` = '$apptime' and `AdvisorID` = '$advisor'";  }
+	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+	$row = mysql_fetch_row($rs);
+	
+	// if max [1] =< EnrolledNum[0], then the spot was indeed taken
+	if($row[1] > $row[0]) // then all good
+	{ 
+		if($debug) { echo("spot available\n<br>"); }
+		return true; 
+	}
+	else // spot was taken
+	{
+		if($debug) { echo("spot NOT available\n<br>"); }	
+		return false; 
+	}
+
+}
+
 ?>
 
 <!-- The invisible form, to POST the "session variables" -->

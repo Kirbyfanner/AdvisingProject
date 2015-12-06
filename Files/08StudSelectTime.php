@@ -16,7 +16,6 @@ $row = mysql_fetch_row($rs);
 $advisorName = $row[1]." ".$row[2];
 
 //Get session vars
-$appTime = $_POST["appTime"];
 $advisor = $_POST["advisor"];
 
 //Get sessions vars
@@ -90,7 +89,6 @@ $status = $row[6];
 	    <div class="nextButton">
 			<input type="submit" name="next" class="button large go" value="Next">
 			<input type="hidden" name="advisor" value="<?php echo $advisor; ?>" />
-			<input type="hidden" name="appTime" value="<?php echo $appTime; ?>" />
 	    </div>
 		</form>
 		<div>

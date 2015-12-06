@@ -1,6 +1,6 @@
 html{ 
       background-color: 
-      #99CCFF; 
+      #f5ca5c; 
       font-family: Arial; 
       font-size: 13px; 
       position: relative; 
@@ -19,6 +19,22 @@ html{
       a:hover{ 
       text-decoration: underline; 
       }
+	  
+	  #tableHeader
+		{
+			background-color: #66AA44;
+			font-size: "32px";
+			color: #ffffff;
+		}
+		
+	table
+	{
+		border-collapse: collapse;
+	}
+	
+	table, th, td {
+		border: 1px solid black;
+	}
 
       #login{ 
       color: #000; 
