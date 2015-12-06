@@ -1,5 +1,5 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S */
 
 //Start the session for this page
 session_start();
@@ -27,6 +27,7 @@ $COMMON = new Common($debug);
 			$date = $_POST["Date"];
 			$times = $_POST["time"];
 			$majors = $_POST["major"];
+			$room = $_POST["room"];
 			$repeatDays = $_POST["repeat"];
 			$repeatWeek = $_POST["stepper"];
 			$studentLimit = 1;
@@ -133,7 +134,7 @@ $COMMON = new Common($debug);
 		  }
 		  
 		  //Print the results, insert any cleared appointments
-		  $insertQuery = "INSERT INTO `Proj2Appointments` (`Time`, `AdvisorID`, `Major`, `Max`) VALUES ";
+		  $insertQuery = "INSERT INTO `Proj2Appointments` (`Time`, `AdvisorID`, `Major`, `Max`, `Location`) VALUES ";
 		  $numToInsert = 0;
 		  foreach($datetimes as $dt)
 		  {
@@ -161,7 +162,7 @@ $COMMON = new Common($debug);
 			//Otherwise, insert this appointment
             else{
 				$numToInsert += 1;
-				$insertQuery .= "('$dt', '$id', '$majorDB','$studentLimit'),";
+				$insertQuery .= "('$dt', '$id', '$majorDB','$studentLimit', '$room'),";
             }
             echo "<br><br>";
 		  }

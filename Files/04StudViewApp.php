@@ -1,5 +1,5 @@
 <?php
-/* PROJ2: Updated by Douglas Lueben */
+/* PROJ2: Updated by Dan S */
 
 session_start(); //Here for the student ID
 
@@ -60,10 +60,14 @@ $status = $row[6];
 					$advisorName = $row2[1] . " " . $row2[2] . " (Office at: " . $row2[5] . ")";
 				}
 				else{$advisorName = "Group";}
+				
+				$sql = "select * from Proj2Appointments where `EnrolledID` = '$studID'";
+				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+				$row = mysql_fetch_row($rs);
 			
 				echo "<label for='info'>";
 				echo "Advisor: ", $advisorName, "<br>";
-				echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
+				echo "Appointment: ", date('l, F d, Y g:i A', $datephp)." in ".$row[7], "</label>";
 			}
 			else // something is up, and there DB table needs to be fixed
 			{

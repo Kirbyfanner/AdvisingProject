@@ -1,5 +1,5 @@
 <?php
-/* PROJ2: Updated by Douglas Lueben */
+/* PROJ2: Updated by Dan S */
 
 session_start(); //Here for the student ID
 
@@ -65,7 +65,7 @@ $advisor = $_POST["advisor"];
 				echo "<h2>Previous Appointment</h2>";
 				echo "<label for='info'>";
 				echo "Advisor: ", $oldAdvisorName, "<br>";
-				echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "</label><br>";
+				echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp)." in " .$row[7], "</label><br>";
 			}
 			
 			//Confirm this is the appt the user wants by displaying the info
@@ -80,10 +80,14 @@ $advisor = $_POST["advisor"];
 			}
 			else{$currentAdvisorName = "Group";}
 			
+			$sql = "select * from Proj2Appointments where `Time` = '$appTime'";
+			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+			$row = mysql_fetch_row($rs);
+
 			echo "<h2>Current Appointment</h2>";
 			echo "<label for='newinfo'>";
 			echo "Advisor: ",$currentAdvisorName,"<br>";
-			echo "Appointment: ",date('l, F d, Y g:i A', $currentDatephp),"</label>";
+			echo "Appointment: ",date('l, F d, Y g:i A', $currentDatephp)." in ".$row[7],"</label>";
 		?>
         </div>
 	    <div class="nextButton">

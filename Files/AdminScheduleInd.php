@@ -1,5 +1,5 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S */
 
 //Start the session for this page
 session_start();
@@ -73,6 +73,13 @@ session_start();
         	<input type="number" id="stepper" name="stepper" min="0" max="4" value="0" />
 		      more week(s)</h3>
         </div>
+		
+		<div class="field">
+		<!-- Meeting Location  -->
+        	<h3>Meeting Location<br>
+        	<input type="text" id="room" name="room" /></h3>
+        </div>
+		
 	    <div class="nextButton">
 		<!-- Create the appointment -->
 			<input type="submit" name="next" class="button large go" value="Create">

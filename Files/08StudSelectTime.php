@@ -1,5 +1,5 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S */
 
 //Start the session on this page
 session_start();
@@ -57,12 +57,11 @@ $status = $row[6];
 			//Create local copies of session vars
 			$localAdvisor = $advisor;
 			$localMaj = $major;
-			
 			if ($advisor != "Group")  // for individual conferences only
 			{ 
 				$sql = "select * from Proj2Appointments where $temp `EnrolledNum` = 0 
-					and (`Major` like '%$localMaj%' or `Major` = '') and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` = ".$advisor." 
-					order by `Time` ASC limit 30";
+				and (`Major` like '%$localMaj%' or `Major` = '') and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` = ".$advisor." 
+				order by `Time` ASC limit 30";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Individual Advising</h2><br>";
 				echo "<label for='prompt'>Select appointment with ",$advisorName,":</label><br>";
@@ -82,7 +81,7 @@ $status = $row[6];
 			while($row = mysql_fetch_row($rs)){
 				$datephp = strtotime($row[1]);
 				echo "<label for='",$row[0],"'>";
-				echo "<input id='",$row[0],"' type='radio' name='appTime' required value='", $row[1], "'>", date('l, F d, Y g:i A', $datephp) ,"</label><br>\n";
+				echo "<input id='",$row[0],"' type='radio' name='appTime' required value='", $row[1], "'>", date('l, F d, Y g:i A', $datephp). " in ".$row[7] ,"</label><br>\n";
 			}
 		?>
         </div>

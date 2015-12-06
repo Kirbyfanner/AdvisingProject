@@ -1,5 +1,5 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S */
 
 //Start the session for the current page
 session_start();
@@ -83,7 +83,7 @@ function displayGroup($id, $date)
 {
 	global $debug; global $COMMON;
 
-	$sql = "SELECT `Time`, `Major`, `EnrolledID`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
+	$sql = "SELECT `Time`, `Major`, `EnrolledID`, `EnrolledNum`, `Max`, `Location` FROM `Proj2Appointments` 
 	WHERE `Time` LIKE '$date%' AND `AdvisorID` = 0 AND `MAX` > 1 ORDER BY `Time` ";
 
 	// ******************************************************************
@@ -100,8 +100,8 @@ function displayGroup($id, $date)
 	if($matches == 0) { return; }
 
 	echo("<h3>Group Appointments:</h3>");
-	echo("<table border='1'><th colspan='4'>Group Appointments</th>\n");
-	echo("<tr><td width='60px'>Time:</td><td>Majors Included:</td><td>students enrolled</td><td>Number of seats</td></tr>\n");
+	echo("<table border='1'><th colspan='5'>Group Appointments</th>\n");
+	echo("<tr><td width='60px'>Time:</td><td>Majors Included:</td><td>students enrolled</td><td>Number of seats</td><td>Location</td></tr>\n");
 
         while ($row = mysql_fetch_array($rs, MYSQL_NUM)) 
 	{
@@ -110,6 +110,7 @@ function displayGroup($id, $date)
                  echo("<td>".$row[1]."</td>");
 		echo("<td>(".$row[3].")".$row[2]."</td>");
 		echo("<td>".$row[4]."</td>");
+		echo("<td>".$row[5]."</td>");
 		echo("</tr>\n");
 	}
         echo("</table><br><br>\n");
@@ -120,7 +121,7 @@ function displayIndividual($id, $date)
 {
 	global $debug; global $COMMON;
 
-        $sql = "SELECT `Time`, `Major`, `EnrolledID` FROM `Proj2Appointments` 
+        $sql = "SELECT `Time`, `Major`, `EnrolledID`, `Location` FROM `Proj2Appointments` 
         WHERE `Time` LIKE '$date%' AND `AdvisorID` = $id AND `MAX` = 1 ORDER BY `Time`";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 	$matches = mysql_num_rows($rs); // see how many rows were collected by the query
@@ -128,8 +129,8 @@ function displayIndividual($id, $date)
 	if($matches == 0) { return; }
 
 	echo("<h3>Individual Appointments:</h3>");
-	echo("<table border='1'><th colspan='4'>Individual Appointments</th>\n");
-	echo("<tr><td width='60px'>Time:</td><td>Majors Included:</td><td>Student's name</td><td>Student ID</td></tr>\n");
+	echo("<table border='1'><th colspan='5'>Individual Appointments</th>\n");
+	echo("<tr><td width='60px'>Time:</td><td>Majors Included:</td><td>Student's name</td><td>Student ID</td><td>Location</td></tr>\n");
 
         while ($row = mysql_fetch_array($rs, MYSQL_NUM)) 
 	{
@@ -141,6 +142,7 @@ function displayIndividual($id, $date)
 		$trdrow = mysql_fetch_row($trdrs);
 		echo("<td>".$trdrow[0]." ".$trdrow[1]."</td>");
 		echo("<td>".$row[2]."</td>");
+		echo("<td>".$row[3]."</td>");
 		echo("</tr>");
 	}
         echo("</table><br><br>");

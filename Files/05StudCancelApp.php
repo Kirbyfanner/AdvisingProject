@@ -1,5 +1,5 @@
 <?php
-/* PROJ2: Updated by Douglas Lueben */
+/* PROJ2: Updated by Dan S */
 
 session_start(); //Here for the student ID
 
@@ -55,11 +55,15 @@ $status = $row[6];
 			}
 			else{$oldAdvisorName = "Group";}
 			
+			$sql = "select * from Proj2Appointments where `EnrolledID` = '$studID'";
+			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+			$row = mysql_fetch_row($rs);
+			
 			//Display the information
 			echo "<h2>Current Appointment</h2>";
 			echo "<label for='info'>";
 			echo "Advisor: ", $oldAdvisorName, "<br>";
-			echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "</label><br>";
+			echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp)." in ".$row[7], "</label><br>";
 		?>		
         </div>
 	    <div class="finishButton">

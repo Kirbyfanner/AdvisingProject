@@ -1,5 +1,5 @@
 <?php
-/* Updated by Douglas Lueben */
+/* Updated by Dan S */
 
 //Start the session for this page
 session_start();
@@ -77,6 +77,12 @@ session_start();
 	<div class="field">
         	<h3>Student limit: 
         	<input type="number" id="stepper1" name="stepper1" min="1" max="10" value="10" /></h3>
+        </div>
+		
+		<div class="field">
+		<!-- Meeting Location  -->
+        	<h3>Meeting Location<br>
+        	<input type="text" id="room" name="room" /></h3>
         </div>
 
 		<!-- Create the appt. -->
