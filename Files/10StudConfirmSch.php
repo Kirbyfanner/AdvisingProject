@@ -113,5 +113,4 @@ $advisor = $_POST["advisor"];
 		</form>
 		</div>
   </body>
-  <?php include("footer.html"); ?>
 </html>

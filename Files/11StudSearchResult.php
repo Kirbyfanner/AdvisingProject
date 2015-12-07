@@ -182,5 +182,4 @@ $status = $row[6];
 		</form>
 		</div>
   </body>
-  <?php include("footer.html"); ?>
 </html>

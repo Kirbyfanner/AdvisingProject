@@ -106,6 +106,5 @@ $COMMON = new Common($debug);
 	<?php include('./workOrder/workButton.php'); ?>
 
   </body>
-  <?php include("footer.html"); ?>
   
 </html>

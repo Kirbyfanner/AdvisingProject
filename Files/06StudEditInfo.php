@@ -82,6 +82,5 @@ $status = $row[6];
 			</div>
 		</form>
   </body>
-  <?php include("footer.html"); ?>
   
 </html>

@@ -100,6 +100,5 @@ session_start();
 
 
   </body>
-  <?php include("footer.html"); ?>
   
 </html>

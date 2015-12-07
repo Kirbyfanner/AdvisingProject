@@ -72,7 +72,6 @@ $debug = false;
 	</div>
 
   </body>
-  <?php include("footer.html"); ?>
   
 </html>
 

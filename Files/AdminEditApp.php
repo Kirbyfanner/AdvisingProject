@@ -44,6 +44,5 @@ session_start();
 	</div>
 		
   </body>
-  <?php include("footer.html"); ?>
   
 </html>

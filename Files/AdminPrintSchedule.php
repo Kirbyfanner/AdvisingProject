@@ -45,5 +45,4 @@ session_start();
 	<?php include('./workOrder/workButton.php'); ?>
 
   </body>
-  <?php include("footer.html"); ?>
 </html>
