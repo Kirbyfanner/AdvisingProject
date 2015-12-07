@@ -61,5 +61,6 @@ if($debug) { echo("Session variables-> ".var_dump($_SESSION)); }
 	<?php include('./workOrder/workButton.php'); ?>
 
 </body>
+<?php include("footer.html"); ?>
   
 </html>

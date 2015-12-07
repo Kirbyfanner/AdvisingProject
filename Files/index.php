@@ -7,7 +7,7 @@
 //header("Location: 01StudSignIn.html");
 
 //Redirect to the Student/Admin selection page
-header("Location: StudentAdminSignIn.html");
+header("Location: StudentAdminSignIn.shtml");
 
 
 ?>

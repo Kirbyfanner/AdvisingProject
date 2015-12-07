@@ -130,5 +130,6 @@ $debug = false;
 	</div>
 	</form>
   </body>
+  <?php include("footer.html"); ?>
   
 </html>
