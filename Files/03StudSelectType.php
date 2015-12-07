@@ -49,4 +49,5 @@ session_start();
 		</form>
 		</div>
   </body>
+  <?php include("footer.html"); ?>
 </html>

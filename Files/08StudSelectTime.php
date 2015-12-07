@@ -104,4 +104,5 @@ $status = $row[6];
 		<p style="color:red">If there are no more open appointments, contact your advisor or click <a href='02StudHome.php'>here</a> to start over.</p>
 		</div>
   </body>
+  <?php include("footer.html"); ?>
 </html>
