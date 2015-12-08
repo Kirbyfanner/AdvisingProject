@@ -1,0 +1,67 @@
+<!-- Updated by Douglas Lueben -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>UMBC COEIT Engineering and Computer Science Advising Student Sign In</title>
+	<link rel='stylesheet' type='text/css' href='css/standard.css'/>
+  </head>
+  <body>
+  
+	<!-- Internet Explorer Warnings -->
+    <div id="login">
+		<div><b><font color="red" size="1"></font>This works best using any browser <u>OTHER</u> than IE.</b></div>
+      <div id="form">
+        <div class="top">
+		<h1>COEIT Engineering and Computer Science Advising</h1>
+		<h2>Student Sign In</h2><br>
+
+		<!-- Student sign in form -->
+        <form action="StudProcessSignIn.php" method="post" name="SignIn">
+	    <div class="field">
+		
+		<!-- First Name -->
+	      <label for="firstN">First Name</label>
+	      <input id="firstN" size="30" maxlength="20" type="text" name="firstN" required autofocus>
+	    </div>
+		
+		<!-- Last Name -->
+	    <div class="field">
+	      <label for="lastN">Last Name</label>
+	      <input id="lastN" size="30" maxlength="20" type="text" name="lastN" required>
+	    </div>
+		
+		<!-- Student ID -->
+        <div class="field">
+            <label for="studID">Student ID</label>
+            <input id="studID" size="30" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" placeholder="AB12345" name="studID" required>
+        </div>
+		
+		<!-- E-mail -->
+		<div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" size="30" maxlength="40" type="email" name="email" placeholder="student1@umbc.edu" required>
+        </div>
+		
+		<!-- Major -->
+        <div class="field">
+              <label for="major">Major</label>
+              <select id="major" name = "major">
+				<option value="CMPE">Computer Engineering</option>
+				<option value="CMSC">Computer Science</option>
+				<option value="MENG">Mechanical Engineering</option>
+				<option value="CENG">Chemical Engineering</option>
+				</select>
+        </div>
+	    <div class="nextButton">
+			<input type="submit" name="next" class="button large go" value="Next">
+	    </div>
+		</div>
+		</form>
+
+<b><font color="red" size="5">This is in TESTING mode only!!! You are creating simulated appointments!!!</font></b>
+	
+  </body>
+  <p></p>
+ <!--#include virtual="footer.html" --> 
+</html>
