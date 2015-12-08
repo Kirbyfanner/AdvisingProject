@@ -20,14 +20,19 @@ if($debug) { echo("Session variables-> ".var_dump($_SESSION)); }
         <div class="top">
 	<h2> Hello 
 	<?php
-
-	if(!isset($_SESSION["UserN"])) // someone landed this page by accident
+	if(!isset($_SESSION["UserId"])) // someone landed this page by accident
 	{
 		return;
 	}		
 	
+	include('CommonMethods.php');
+	$Common = new Common($debug);
+	$sql = "SELECT * FROM `Proj2Advisors` WHERE `id` = '{$_SESSION['UserId']}'";
+	$rs = $Common->executeQuery($sql, "Advising Appointments");
+	$row = mysql_fetch_row($rs);
+	
 		//Print the advisor's name as a greeting
-		echo $_SESSION["FirstN"];
+		echo $row[1];
 	?>
 	</h2>
 	

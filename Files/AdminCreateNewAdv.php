@@ -17,12 +17,6 @@ session_start();
       <div id="form">
         <div class="top">
 		<h2>Create New Advisor Account</h2>
-		<?php
-		//If the passwords didn't match, display that to the user
-      if($_SESSION["PassCon"] == true){
-        echo "<h3 style='color:red'>Passwords do not match!!</h3>";
-      }
-    ?>
 	
 		<!-- Create Account Form -->
 		<form action="AdminProcessCreateNew.php" method="post" name="Create">
